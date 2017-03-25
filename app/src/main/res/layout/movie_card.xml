@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        app:cardCornerRadius="@dimen/card_movie_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/thumbnail_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/movie_cover_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/fight_club"/>
+            
+            <TextView
+                android:id="@+id/title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/thumbnail_image_view"
+                android:text="@string/title_placeholder"
+                android:paddingLeft="@dimen/movie_title_padding"
+                android:paddingRight="@dimen/movie_title_padding"
+                android:paddingTop="@dimen/movie_title_padding"/>
+
+                <TextView
+                    android:id="@+id/genre_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genre_placeholder"
+                    android:paddingLeft="@dimen/movie_title_padding"
+                    android:paddingRight="@dimen/movie_title_padding"
+                    android:layout_below="@id/title_text_view"
+                    />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/genre_text_view"
+                >
+
+                <ImageView
+                    android:id="@+id/star_image_view"
+                    android:layout_width="41dp"
+                    android:layout_height="31dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:src="@drawable/icon_star"
+                    android:paddingLeft="@dimen/movie_title_padding"
+                    android:paddingRight="@dimen/movie_title_padding"
+                    android:paddingBottom="@dimen/movie_title_padding"/>
+
+                <TextView
+                    android:id="@+id/vote_avg_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vote_placeholder"
+                    android:paddingRight="@dimen/movie_title_padding"
+                    android:paddingBottom="@dimen/movie_title_padding"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    />
+
+                </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Android MVP</string>
+    <string name="tmdb_api_key">c33b0f90d8b83f133f1d5a1ce3782d4c</string>
+    <string name="genre_placeholder">Thriller</string>
+    <string name="title_placeholder">Fight Club</string>
+    <string name="vote_placeholder">8.2</string>
+    <string name="backdrop_title">Now Playing</string>
+    <string name="backdrop_subtitle">From TMDB Website</string>
+
+</resources>
