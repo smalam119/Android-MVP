@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 Log.d("MOVIE_RES",response.body().getTotalPages()+"");
+                mMovieList.addAll(response.body().getResults());
+                mMoviesAdapter.notifyDataSetChanged();
             }
 
             @Override
