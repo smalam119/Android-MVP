@@ -7,6 +7,7 @@ package com.smalam.pseudozero.androidmvp.Service;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,10 +20,10 @@ public class ApiClient {
 
     public interface ApiInterface {
         @GET("movie/now_playing")
-        Call<MovieResponse> getMovieResponse(@Query("api_key") String apiKey);
+        Call<MovieResponse> getMovieResponseByCallBack(@Query("api_key") String apiKey);
 
-        @GET("movie/top_rated")
-        Call<MovieResponse> getTopRatedMovies(@Query("api_key") String apiKey);
+        @GET("movie/now_playing")
+        Observable<MovieResponse> getMovieResponseByObservable(@Query("api_key") String apiKey);
     }
 
     public static Retrofit getClient() {

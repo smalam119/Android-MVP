@@ -23,7 +23,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/fight_club"/>
+                android:src="@drawable/image_placeholder"/>
             
             <TextView
                 android:id="@+id/title_text_view"

@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
     private Context mContext;
     private List<Movie> mMovieList;
+    private static String BASE_URL_POSTER =  "http://image.tmdb.org/t/p/w160/";
 
     public MoviesAdapter(Context mContext, List<Movie> mMovieList ) {
         this.mContext = mContext;
@@ -43,7 +44,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         Movie movie = mMovieList.get(position);
         holder.titleTextView.setText(movie.getTitle());
         holder.genreTextView.setText("");
-        Glide.with(mContext).load(movie.getPosterPath()).into(holder.imageViewThumbNail);
+
+        Glide
+                .with(mContext)
+                .load(BASE_URL_POSTER+movie.getPosterPath())
+                .centerCrop()
+                .placeholder(R.drawable.image_placeholder)
+                .crossFade()
+                .into(holder.imageViewThumbNail);
     }
 
     @Override
