@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.View;
+package com.smalam.pseudozero.androidmvp.MovieList.View;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

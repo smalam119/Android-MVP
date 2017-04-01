@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.View;
+package com.smalam.pseudozero.androidmvp.MovieList.View;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -10,36 +10,25 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import com.smalam.pseudozero.androidmvp.Model.Movie;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
+import com.smalam.pseudozero.androidmvp.MovieList.Interface.MovieListContact;
+import com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter;
 import com.smalam.pseudozero.androidmvp.R;
-import com.smalam.pseudozero.androidmvp.Service.ApiClient;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MovieListContact.View {
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mMovieList;
-    private String apiKey;
+    private MovieListContact.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         initCollapsingToolbar();
 
-        apiKey = getResources().getString(R.string.tmdb_api_key);
-
         mMovieList = new ArrayList<>();
         mMoviesAdapter = new MoviesAdapter(this,mMovieList);
 
@@ -61,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mMoviesAdapter);
 
-        getMovieDataByObserving();
-        //getMovieDataByCallBack();
+        presenter = new MovieListPresenter(this,this);
+        presenter.fetchMovieData();
+
+
     }
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
@@ -91,6 +80,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onMovieDataFetched(Response<MovieResponse> response) {
+        mMovieList.addAll(response.body().getResults());
+        mMoviesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMovieDataFetched(MovieResponse response) {
+        mMovieList.addAll(response.getResults());
+        mMoviesAdapter.notifyDataSetChanged();
+    }
+
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;
@@ -132,54 +134,5 @@ public class MainActivity extends AppCompatActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
-    private void getMovieDataByCallBack() {
-        ApiClient.ApiInterface apiInterface = ApiClient.getClient().create(ApiClient.ApiInterface.class);
-        Call<MovieResponse> call = apiInterface.getMovieResponseByCallBack(apiKey);
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                Log.d("MOVIE_RES",response.body().getTotalPages()+"");
-                mMovieList.addAll(response.body().getResults());
-                mMoviesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Log.d("MOVIE_RES",call.toString() + " " + t.toString());
-            }
-        });
-    }
-
-    private void getMovieDataByObserving() {
-        ApiClient.ApiInterface apiInterface = ApiClient.getClient().create(ApiClient.ApiInterface.class);
-        Observable<MovieResponse> observable = apiInterface.getMovieResponseByObservable(apiKey);
-        Observer movieObserver = new Observer<MovieResponse>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(MovieResponse value) {
-                mMovieList.addAll(value.getResults());
-                mMoviesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movieObserver);
     }
 }

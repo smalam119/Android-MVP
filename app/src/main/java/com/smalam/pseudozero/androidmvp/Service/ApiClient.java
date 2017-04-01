@@ -26,7 +26,7 @@ public class ApiClient {
         Observable<MovieResponse> getMovieResponseByObservable(@Query("api_key") String apiKey);
     }
 
-    public static Retrofit getClient() {
+    public ApiInterface getClient() {
         if(retrofit ==  null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -34,6 +34,6 @@ public class ApiClient {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
-        return retrofit;
+        return retrofit.create(ApiClient.ApiInterface.class);
     }
 }
