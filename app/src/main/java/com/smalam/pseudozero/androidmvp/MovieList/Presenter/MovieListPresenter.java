@@ -36,7 +36,8 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
     @Override
     public void fetchMovieData() {
-        getMovieDataByCallBack();
+        //getMovieDataByCallBack();
+        getMovieDataByObserving();
     }
 
     private void getMovieDataByCallBack() {
@@ -48,7 +49,7 @@ public class MovieListPresenter implements MovieListContact.Presenter {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 Log.d("MOVIE_RES",response.body().getTotalPages()+"");
-                view.onMovieDataFetched(response);
+                view.onMovieDataFetchedSuccess(response);
 
             }
 
@@ -61,6 +62,8 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
     private void getMovieDataByObserving() {
 
+        view.showLoader();
+
         Observer movieObserver = new Observer<MovieResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -69,12 +72,15 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
             @Override
             public void onNext(MovieResponse response) {
-                view.onMovieDataFetched(response);
+                view.removeLoader();
+                view.onMovieDataFetchedSuccess(response);
             }
 
             @Override
             public void onError(Throwable e) {
-
+                String errorMessage = e.getMessage().toString();
+                view.removeLoader();
+                view.onMovieDataFetchedError(errorMessage);
             }
 
             @Override

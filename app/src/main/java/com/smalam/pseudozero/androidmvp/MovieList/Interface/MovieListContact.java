@@ -10,9 +10,11 @@ import retrofit2.Response;
 
 public interface MovieListContact {
     interface View {
-        void onMovieDataFetched(Response<MovieResponse> response);
-        void onMovieDataFetched(MovieResponse response);
-
+        void onMovieDataFetchedSuccess(Response<MovieResponse> response);
+        void onMovieDataFetchedSuccess(MovieResponse response);
+        void onMovieDataFetchedError(String errorMessage);
+        void showLoader();
+        void removeLoader();
     }
 
     interface Presenter {

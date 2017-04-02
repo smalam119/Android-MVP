@@ -50,4 +50,9 @@ dependencies {
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    //AVLoadingIndicatorView
+    dependencies {
+        compile 'com.wang.avi:library:2.1.3'
+    }
 }

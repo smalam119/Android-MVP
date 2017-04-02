@@ -4,7 +4,9 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.CoordinatorLayout;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +19,7 @@ import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 import com.smalam.pseudozero.androidmvp.MovieList.Interface.MovieListContact;
 import com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter;
 import com.smalam.pseudozero.androidmvp.R;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements MovieListContact.View {
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.progress_bar) AVLoadingIndicatorView avLoadingIndicatorView;
+    @BindView(R.id.main_content) CoordinatorLayout coordinatorLayout;
+
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mMovieList;
     private MovieListContact.Presenter presenter;
@@ -82,15 +88,30 @@ public class MainActivity extends AppCompatActivity implements MovieListContact.
     }
 
     @Override
-    public void onMovieDataFetched(Response<MovieResponse> response) {
+    public void onMovieDataFetchedSuccess(Response<MovieResponse> response) {
         mMovieList.addAll(response.body().getResults());
         mMoviesAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onMovieDataFetched(MovieResponse response) {
+    public void onMovieDataFetchedSuccess(MovieResponse response) {
         mMovieList.addAll(response.getResults());
         mMoviesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMovieDataFetchedError(String errorMessage) {
+        Snackbar.make(coordinatorLayout,"There is a problem fetching data"+" "+errorMessage,Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showLoader() {
+        avLoadingIndicatorView.show();
+    }
+
+    @Override
+    public void removeLoader() {
+        avLoadingIndicatorView.hide();
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
