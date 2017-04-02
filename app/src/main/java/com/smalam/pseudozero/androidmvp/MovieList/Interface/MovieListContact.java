@@ -1,5 +1,6 @@
 package com.smalam.pseudozero.androidmvp.MovieList.Interface;
 
+import com.smalam.pseudozero.androidmvp.Model.Movie;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 
 import retrofit2.Response;
@@ -19,5 +20,10 @@ public interface MovieListContact {
 
     interface Presenter {
         void fetchMovieData();
+        void onStop();
+    }
+
+    interface OnItemClickListener {
+        void onClick(Movie item);
     }
 }

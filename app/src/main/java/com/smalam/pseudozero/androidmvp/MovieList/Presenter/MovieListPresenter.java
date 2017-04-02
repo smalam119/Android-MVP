@@ -23,6 +23,7 @@ import retrofit2.Response;
 public class MovieListPresenter implements MovieListContact.Presenter {
 
     private String apiKey;
+    private Observer movieObserver;
     private final Context context;
     private final ApiClient apiClient;
     private final MovieListContact.View view;
@@ -40,6 +41,11 @@ public class MovieListPresenter implements MovieListContact.Presenter {
         getMovieDataByObserving();
     }
 
+    @Override
+    public void onStop() {
+        apiClient.getClient().getMovieResponseByObservable(apiKey).unsubscribeOn(Schedulers.newThread());
+    }
+
     private void getMovieDataByCallBack() {
         apiClient
                 .getClient()
@@ -48,14 +54,13 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                Log.d("MOVIE_RES",response.body().getTotalPages()+"");
                 view.onMovieDataFetchedSuccess(response);
 
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Log.d("MOVIE_RES",call.toString() + " " + t.toString());
+                view.onMovieDataFetchedError(t.getMessage().toString());
             }
         });
     }
