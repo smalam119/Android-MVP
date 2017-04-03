@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBG"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MovieDetail.View.MovieDetailActivity"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/detail_poster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_placeholder"
+        android:paddingLeft="@dimen/movie_title_padding"
+        android:paddingRight="@dimen/movie_title_padding"
+        android:paddingTop="@dimen/movie_title_padding"/>
+
+
+    <TextView
+        android:id="@+id/movie_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_placeholder"
+        android:paddingLeft="@dimen/movie_title_padding"
+        android:paddingRight="@dimen/movie_title_padding"
+        android:paddingTop="@dimen/movie_title_padding"/>
+
+    <TextView
+        android:id="@+id/movie_detail_tagline_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tagline_placeholder"
+        android:paddingLeft="@dimen/movie_title_padding"
+        android:paddingRight="@dimen/movie_title_padding"
+        android:paddingTop="@dimen/movie_title_padding"/>
+
+    <TextView
+        android:id="@+id/movie_detail_overview_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/overview_placeholder"
+        android:paddingLeft="@dimen/movie_title_padding"
+        android:paddingRight="@dimen/movie_title_padding"
+        android:paddingTop="@dimen/movie_title_padding"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBG"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MovieDetail.View.MovieDetailActivity"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/movie_detail_genre_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genre_placeholder"
+            android:paddingLeft="@dimen/movie_title_padding"
+            android:paddingRight="@dimen/movie_title_padding"
+            android:paddingTop="@dimen/movie_title_padding"
+            />
+
+        <TextView
+            android:id="@+id/movie_detail_runtime_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/runtime_placeholder"
+            android:paddingLeft="@dimen/movie_title_padding"
+            android:paddingRight="@dimen/movie_title_padding"
+            android:paddingTop="@dimen/movie_title_padding"
+            android:layout_marginLeft="@dimen/movie_detail_margin"
+            />
+
+        <ImageView
+            android:id="@+id/star_image_view"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="false"
+            android:src="@drawable/icon_star"
+            android:paddingLeft="@dimen/movie_title_padding"
+            android:paddingRight="@dimen/movie_title_padding"
+            android:paddingTop="@dimen/movie_title_padding"
+            android:paddingBottom="@dimen/movie_title_padding"
+            android:layout_marginLeft="@dimen/movie_detail_margin"/>
+
+        <TextView
+            android:id="@+id/movie_detail_vote_avg_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vote_placeholder"
+            android:paddingLeft="@dimen/movie_title_padding"
+            android:paddingRight="@dimen/movie_title_padding"
+            android:paddingTop="@dimen/movie_title_padding"
+            android:paddingBottom="@dimen/movie_title_padding"
+            />
+
+
+
+    </LinearLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:indicatorName="BallPulseIndicator"
+        />
+
+</LinearLayout>

@@ -49,14 +49,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/backdrop_title"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/pasteColor"
                         android:textSize="@dimen/backdrop_title" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/backdrop_subtitle"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/pasteColor"
                         android:textSize="@dimen/backdrop_subtitle" />
 
                 </LinearLayout>

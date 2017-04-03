@@ -5,5 +5,11 @@
     <string name="vote_placeholder">8.2</string>
     <string name="backdrop_title">Now Playing</string>
     <string name="backdrop_subtitle">From TMDB Website</string>
-
+    <string name="tagline_placeholder">"We meet at a very strange time"</string>
+    <string name="overview_placeholder">A ticking-time-bomb insomniac and a slippery
+        soap salesman channel primal male aggression into a shocking new
+        form of therapy. Their concept catches on, with underground
+        "fight clubs" forming in every town, until an eccentric gets
+        in the way and ignites an out-of-control spiral toward oblivion.</string>
+    <string name="runtime_placeholder">123 Minutes</string>
 </resources>

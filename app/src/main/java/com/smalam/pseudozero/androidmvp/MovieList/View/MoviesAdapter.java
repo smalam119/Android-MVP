@@ -3,9 +3,11 @@ package com.smalam.pseudozero.androidmvp.MovieList.View;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,10 +47,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(MovieViewHolder holder, final int position) {
         Movie movie = mMovieList.get(position);
         holder.titleTextView.setText(movie.getTitle());
-        holder.genreTextView.setText("");
         holder.click(mMovieList.get(position),listener);
 
         Glide
@@ -68,10 +69,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_text_view) TextView titleTextView;
+        @BindView(R.id.movie_title_text_view) TextView titleTextView;
         @BindView(R.id.thumbnail_image_view) ImageView imageViewThumbNail;
-        @BindView(R.id.genre_text_view) TextView genreTextView;
-        @BindView(R.id.card_view) CardView cardView;
+        //@BindView(R.id.info_button) Button infoButton;
 
         public MovieViewHolder(View view) {
             super(view);
@@ -86,5 +86,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                 }
             });
         }
+
     }
 }
