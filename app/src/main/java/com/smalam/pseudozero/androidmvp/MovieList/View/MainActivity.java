@@ -1,8 +1,8 @@
 package com.smalam.pseudozero.androidmvp.MovieList.View;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,10 +10,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.smalam.pseudozero.androidmvp.Constants;
 import com.smalam.pseudozero.androidmvp.Model.Movie;
-import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.MovieListContact;
-import com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter;
+import com.smalam.pseudozero.androidmvp.MovieDetail.View.MovieDetailActivity;
+import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.R;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -22,20 +22,20 @@ import android.util.TypedValue;
 import android.content.res.Resources;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements MovieListContact.View {
+public class MainActivity extends AppCompatActivity implements IMovieListContact.IView {
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.progress_bar) AVLoadingIndicatorView avLoadingIndicatorView;
     @BindView(R.id.main_content) CoordinatorLayout coordinatorLayout;
 
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mMovieList;
-    private MovieListContact.Presenter presenter;
+    private IMovieListContact.IPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,40 +47,24 @@ public class MainActivity extends AppCompatActivity implements MovieListContact.
         initCollapsingToolbar();
 
         mMovieList = new ArrayList<>();
-        mMoviesAdapter = new MoviesAdapter(this,mMovieList, new MovieListContact.OnItemClickListener() {
+        mMoviesAdapter = new MoviesAdapter(this,mMovieList, new IMovieListContact.OnItemClickListener() {
             @Override
             public void onClick(Movie item) {
-                Snackbar.make(coordinatorLayout,item.getTitle(),Snackbar.LENGTH_LONG).show();
+                int movieId = item.getId();
+                startActivity(new Intent(getApplicationContext(), MovieDetailActivity.class).putExtra(Constants.KEY_MOVIE_ID,movieId));
             }
         });
 
         prepareView();
 
-        presenter = new MovieListPresenter(this,this);
-        presenter.fetchMovieData();
+        presenter = new com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter(this,this);
+        presenter.getMovieData();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onStop();
-    }
-
-    @Override
-    public void onMovieDataFetchedSuccess(Response<MovieResponse> response) {
-        mMovieList.addAll(response.body().getResults());
-        mMoviesAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onMovieDataFetchedSuccess(MovieResponse response) {
-        mMovieList.addAll(response.getResults());
-        mMoviesAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onMovieDataFetchedError(String errorMessage) {
-        Snackbar.make(coordinatorLayout,"There is a problem fetching data"+" "+errorMessage,Snackbar.LENGTH_LONG).show();
+        presenter.onStopAPIService();
     }
 
     @Override
@@ -89,8 +73,18 @@ public class MainActivity extends AppCompatActivity implements MovieListContact.
     }
 
     @Override
-    public void removeLoader() {
+    public void hideLoader() {
         avLoadingIndicatorView.hide();
+    }
+
+    @Override
+    public void onDataFetchedSuccess(Object data) {
+        mMovieList.addAll((Collection<? extends Movie>) data);
+        mMoviesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDataFetchedError(Object data) {
     }
 
     private void prepareView(){

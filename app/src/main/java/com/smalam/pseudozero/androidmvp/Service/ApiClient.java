@@ -28,10 +28,10 @@ public class ApiClient {
         Observable<MovieResponse> getMovieResponseByObservable(@Query("api_key") String apiKey);
 
         @GET("movie/{movie_id}")
-        Call<MovieDetail> getMovieDetailByCallBack(@Query("api_key") String apiKey, @Path("movie_id") String movieId);
+        Call<MovieDetail> getMovieDetailByCallBack(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
 
         @GET("movie/{movie_id}")
-        Observable<MovieDetail> getMovieDetailByObservable(@Query("api_key") String apiKey, @Path("movie_id") String movieId);
+        Observable<MovieDetail> getMovieDetailByObservable(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
     }
 
     public ApiInterface getClient() {

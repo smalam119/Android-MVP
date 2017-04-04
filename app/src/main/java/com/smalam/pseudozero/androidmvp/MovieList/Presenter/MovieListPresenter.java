@@ -1,10 +1,9 @@
 package com.smalam.pseudozero.androidmvp.MovieList.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.MovieListContact;
+import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.R;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
 
@@ -20,15 +19,14 @@ import retrofit2.Response;
  * Created by Sayed Mahmudul Alam on 4/1/2017.
  */
 
-public class MovieListPresenter implements MovieListContact.Presenter {
+public class MovieListPresenter implements IMovieListContact.IPresenter {
 
     private String apiKey;
-    private Observer movieObserver;
     private final Context context;
     private final ApiClient apiClient;
-    private final MovieListContact.View view;
+    private final IMovieListContact.IView view;
 
-    public MovieListPresenter( MovieListContact.View view, Context context) {
+    public MovieListPresenter(IMovieListContact.IView view, Context context) {
         this.view = view;
         this.context = context;
         this.apiClient = new ApiClient();
@@ -36,17 +34,20 @@ public class MovieListPresenter implements MovieListContact.Presenter {
     }
 
     @Override
-    public void fetchMovieData() {
+    public void getMovieData() {
         //getMovieDataByCallBack();
         getMovieDataByObserving();
     }
 
     @Override
-    public void onStop() {
+    public void onStopAPIService() {
         apiClient.getClient().getMovieResponseByObservable(apiKey).unsubscribeOn(Schedulers.newThread());
     }
 
     private void getMovieDataByCallBack() {
+
+        view.showLoader();
+
         apiClient
                 .getClient()
                 .getMovieResponseByCallBack(apiKey)
@@ -54,13 +55,14 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                view.onMovieDataFetchedSuccess(response);
-
+                view.hideLoader();
+                view.onDataFetchedSuccess(response.body().getResults());
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                view.onMovieDataFetchedError(t.getMessage().toString());
+                view.hideLoader();
+                view.onDataFetchedSuccess(t.getMessage().toString());
             }
         });
     }
@@ -77,15 +79,15 @@ public class MovieListPresenter implements MovieListContact.Presenter {
 
             @Override
             public void onNext(MovieResponse response) {
-                view.removeLoader();
-                view.onMovieDataFetchedSuccess(response);
+                view.hideLoader();
+                view.onDataFetchedSuccess(response.getResults());
             }
 
             @Override
             public void onError(Throwable e) {
+                view.hideLoader();
                 String errorMessage = e.getMessage().toString();
-                view.removeLoader();
-                view.onMovieDataFetchedError(errorMessage);
+                view.onDataFetchedError(errorMessage);
             }
 
             @Override
