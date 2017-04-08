@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
 
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mMovieList;
-    private IMovieListContact.IPresenter presenter;
+    private IMovieListContact.IPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
 
         prepareView();
 
-        presenter = new com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter(this,this);
-        presenter.getMovieData();
+        mPresenter = new com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter(this,this);
+        mPresenter.getMovieData();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onStopAPIService();
+        mPresenter.onStopAPIService();
     }
 
     @Override

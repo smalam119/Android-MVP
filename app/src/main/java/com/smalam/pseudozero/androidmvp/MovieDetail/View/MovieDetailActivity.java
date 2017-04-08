@@ -1,6 +1,5 @@
 package com.smalam.pseudozero.androidmvp.MovieDetail.View;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +27,8 @@ public class MovieDetailActivity extends AppCompatActivity implements IMovieDeta
     @BindView(R.id.movie_detail_progress_bar) AVLoadingIndicatorView avLoadingIndicatorView;
     @BindView(R.id.movie_detail_poster_image_view) ImageView posterImageView;
 
-    private int movieID = 0;
-    private IMovieDetailContract.IPresenter presenter;
+    private int mMovieID = 0;
+    private IMovieDetailContract.IPresenter mPresenter;
     private static String BASE_URL_POSTER =  "http://image.tmdb.org/t/p/w300/";
 
     @Override
@@ -39,10 +38,10 @@ public class MovieDetailActivity extends AppCompatActivity implements IMovieDeta
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        movieID = intent.getIntExtra(Constants.KEY_MOVIE_ID,0);
+        mMovieID = intent.getIntExtra(Constants.KEY_MOVIE_ID,0);
 
-        presenter = new MovieDetailPresenter(this,this);
-        presenter.getMovieDetailData(movieID);
+        mPresenter = new MovieDetailPresenter(this,this);
+        mPresenter.getMovieDetailData(mMovieID);
 
     }
 

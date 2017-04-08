@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 
 public class ApiClient {
     private static String BASE_URL =  "https://api.themoviedb.org/3/";
-    private static Retrofit retrofit = null;
+    private static Retrofit mRetrofit = null;
 
     public interface ApiInterface {
         @GET("movie/now_playing")
@@ -35,13 +35,13 @@ public class ApiClient {
     }
 
     public ApiInterface getClient() {
-        if(retrofit ==  null) {
-            retrofit = new Retrofit.Builder()
+        if(mRetrofit ==  null) {
+            mRetrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
-        return retrofit.create(ApiClient.ApiInterface.class);
+        return mRetrofit.create(ApiClient.ApiInterface.class);
     }
 }

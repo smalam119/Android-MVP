@@ -21,16 +21,16 @@ import retrofit2.Response;
 
 public class MovieListPresenter implements IMovieListContact.IPresenter {
 
-    private String apiKey;
-    private final Context context;
-    private final ApiClient apiClient;
-    private final IMovieListContact.IView view;
+    private String mApiKey;
+    private final Context mContext;
+    private final ApiClient mApiClient;
+    private final IMovieListContact.IView mView;
 
     public MovieListPresenter(IMovieListContact.IView view, Context context) {
-        this.view = view;
-        this.context = context;
-        this.apiClient = new ApiClient();
-        this.apiKey = getApiKey();
+        this.mView = view;
+        this.mContext = context;
+        this.mApiClient = new ApiClient();
+        this.mApiKey = getmApiKey();
     }
 
     @Override
@@ -41,35 +41,35 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
 
     @Override
     public void onStopAPIService() {
-        apiClient.getClient().getMovieResponseByObservable(apiKey).unsubscribeOn(Schedulers.newThread());
+        mApiClient.getClient().getMovieResponseByObservable(mApiKey).unsubscribeOn(Schedulers.newThread());
     }
 
     private void getMovieDataByCallBack() {
 
-        view.showLoader();
+        mView.showLoader();
 
-        apiClient
+        mApiClient
                 .getClient()
-                .getMovieResponseByCallBack(apiKey)
+                .getMovieResponseByCallBack(mApiKey)
                 .enqueue(new Callback<MovieResponse>() {
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                view.hideLoader();
-                view.onDataFetchedSuccess(response.body().getResults());
+                mView.hideLoader();
+                mView.onDataFetchedSuccess(response.body().getResults());
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                view.hideLoader();
-                view.onDataFetchedSuccess(t.getMessage().toString());
+                mView.hideLoader();
+                mView.onDataFetchedSuccess(t.getMessage().toString());
             }
         });
     }
 
     private void getMovieDataByObserving() {
 
-        view.showLoader();
+        mView.showLoader();
 
         Observer movieObserver = new Observer<MovieResponse>() {
             @Override
@@ -79,15 +79,15 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
 
             @Override
             public void onNext(MovieResponse response) {
-                view.hideLoader();
-                view.onDataFetchedSuccess(response.getResults());
+                mView.hideLoader();
+                mView.onDataFetchedSuccess(response.getResults());
             }
 
             @Override
             public void onError(Throwable e) {
-                view.hideLoader();
+                mView.hideLoader();
                 String errorMessage = e.getMessage().toString();
-                view.onDataFetchedError(errorMessage);
+                mView.onDataFetchedError(errorMessage);
             }
 
             @Override
@@ -96,16 +96,16 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
             }
         };
 
-        apiClient
+        mApiClient
                 .getClient()
-                .getMovieResponseByObservable(apiKey)
+                .getMovieResponseByObservable(mApiKey)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
     }
 
-    private String getApiKey() {
-        String apiKey = context.getResources().getString(R.string.tmdb_api_key);
+    private String getmApiKey() {
+        String apiKey = mContext.getResources().getString(R.string.tmdb_api_key);
         return apiKey;
     }
 }
