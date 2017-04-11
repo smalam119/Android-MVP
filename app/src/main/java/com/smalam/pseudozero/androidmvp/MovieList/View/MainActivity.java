@@ -10,10 +10,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Constants;
 import com.smalam.pseudozero.androidmvp.Model.Movie;
 import com.smalam.pseudozero.androidmvp.MovieDetail.View.MovieDetailActivity;
+import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Components.DaggerMovieListComponent;
+import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.MovieListViewModule;
 import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
+import com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter;
 import com.smalam.pseudozero.androidmvp.R;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
 
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mMovieList;
-    private IMovieListContact.IPresenter mPresenter;
+
+    @Inject
+    MovieListPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +63,12 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
             }
         });
 
-        prepareView();
+        DaggerMovieListComponent.builder()
+                .apiServiceComponent(((App) getApplicationContext()).getmApiServiceComponent())
+                .movieListViewModule(new MovieListViewModule(this))
+                .build().inject(this);
 
-        mPresenter = new com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter(this,this);
+        prepareView();
         mPresenter.getMovieData();
     }
 

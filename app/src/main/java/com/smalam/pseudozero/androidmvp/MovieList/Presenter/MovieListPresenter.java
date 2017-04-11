@@ -24,11 +24,6 @@ import retrofit2.Retrofit;
 
 public class MovieListPresenter implements IMovieListContact.IPresenter {
 
-    //private String mApiKey;
-    //private final Context mContext;
-    //private final ApiClient mApiClient;
-    //private final IMovieListContact.IView mView;
-
     public Retrofit retrofit;
     IMovieListContact.IView mView;
 
@@ -36,9 +31,6 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
     public MovieListPresenter(IMovieListContact.IView view, Retrofit retrofit) {
         this.mView = view;
         this.retrofit = retrofit;
-        //this.mContext = context;
-        //this.mApiClient = new ApiClient();
-        //this.mApiKey = getmApiKey();
     }
 
     @Override
@@ -50,7 +42,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
     @Override
     public void onStopAPIService() {
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable("")
+                .getMovieResponseByObservable("c33b0f90d8b83f133f1d5a1ce3782d4c")
                 .unsubscribeOn(Schedulers.newThread());
     }
 
@@ -59,7 +51,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
         mView.showLoader();
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByCallBack("")
+                .getMovieResponseByCallBack("c33b0f90d8b83f133f1d5a1ce3782d4c")
                 .enqueue(new Callback<MovieResponse>() {
 
             @Override
@@ -106,7 +98,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
         };
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable("")
+                .getMovieResponseByObservable("c33b0f90d8b83f133f1d5a1ce3782d4c")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
