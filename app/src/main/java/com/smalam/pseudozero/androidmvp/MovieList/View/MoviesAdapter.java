@@ -25,13 +25,13 @@ import butterknife.ButterKnife;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
     private Context mContext;
     private List<Movie> mMovieList;
-    private final IMovieListContact.OnItemClickListener listener;
+    private final IMovieListContact.OnItemClickListener mListener;
     private static String BASE_URL_POSTER =  "http://image.tmdb.org/t/p/w160/";
 
     public MoviesAdapter(Context mContext, List<Movie> mMovieList,IMovieListContact.OnItemClickListener listener) {
         this.mContext = mContext;
         this.mMovieList = mMovieList;
-        this.listener = listener;
+        this.mListener = listener;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public void onBindViewHolder(MovieViewHolder holder, final int position) {
         Movie movie = mMovieList.get(position);
         holder.titleTextView.setText(movie.getTitle());
-        holder.click(mMovieList.get(position),listener);
+        holder.click(mMovieList.get(position), mListener);
 
         Glide
                 .with(mContext)

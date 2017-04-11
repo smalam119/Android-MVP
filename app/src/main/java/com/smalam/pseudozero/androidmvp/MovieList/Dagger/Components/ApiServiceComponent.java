@@ -8,7 +8,7 @@ import dagger.Component;
 import retrofit2.Retrofit;
 
 /**
- * Created by Sayed Mahmudul Alam on 4/11/2017.
+ * Created by Sayed Mahmudul Alam on 4/8/2017.
  */
 
 @Singleton

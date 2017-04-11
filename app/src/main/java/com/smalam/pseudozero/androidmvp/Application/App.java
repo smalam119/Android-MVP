@@ -8,7 +8,7 @@ import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.ApiServiceModul
 import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.AppModule;
 
 /**
- * Created by Sayed Mahmudul Alam on 4/11/2017.
+ * Created by Sayed Mahmudul Alam on 4/8/2017.
  */
 
 public class App extends Application {
@@ -17,14 +17,15 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mApiServiceComponent = DaggerApiServiceComponent
-                .builder()
+
+        mApiServiceComponent = DaggerApiServiceComponent.builder()
                 .appModule(new AppModule(this))
-                .apiServiceModule(new ApiServiceModule(""))
+                .apiServiceModule( new ApiServiceModule(""))
                 .build();
+
     }
 
-    public ApiServiceComponent getApiServiceComponent() {
+    public ApiServiceComponent getmApiServiceComponent() {
         return mApiServiceComponent;
     }
 }
