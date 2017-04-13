@@ -42,7 +42,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
     @Override
     public void onStopAPIService() {
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable("c33b0f90d8b83f133f1d5a1ce3782d4c")
+                .getMovieResponseByObservable()
                 .unsubscribeOn(Schedulers.newThread());
     }
 
@@ -51,7 +51,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
         mView.showLoader();
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByCallBack("c33b0f90d8b83f133f1d5a1ce3782d4c")
+                .getMovieResponseByCallBack()
                 .enqueue(new Callback<MovieResponse>() {
 
             @Override
@@ -98,7 +98,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
         };
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable("c33b0f90d8b83f133f1d5a1ce3782d4c")
+                .getMovieResponseByObservable()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);

@@ -22,10 +22,10 @@ public class ApiClient {
 
     public interface ApiInterface {
         @GET("movie/now_playing")
-        Call<MovieResponse> getMovieResponseByCallBack(@Query("api_key") String apiKey);
+        Call<MovieResponse> getMovieResponseByCallBack();
 
         @GET("movie/now_playing")
-        Observable<MovieResponse> getMovieResponseByObservable(@Query("api_key") String apiKey);
+        Observable<MovieResponse> getMovieResponseByObservable();
 
         @GET("movie/{movie_id}")
         Call<MovieDetail> getMovieDetailByCallBack(@Path("movie_id") int movieId, @Query("api_key") String apiKey);

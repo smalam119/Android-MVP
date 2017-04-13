@@ -20,7 +20,7 @@ public class App extends Application {
 
         mApiServiceComponent = DaggerApiServiceComponent.builder()
                 .appModule(new AppModule(this))
-                .apiServiceModule( new ApiServiceModule("https://api.themoviedb.org/3/"))
+                .apiServiceModule( new ApiServiceModule("https://api.themoviedb.org/3/","c33b0f90d8b83f133f1d5a1ce3782d4c"))
                 .build();
 
     }
