@@ -20,7 +20,7 @@ public class MainViewModule {
 
     @Provides
     @CustomScope
-    IMovieDetailContract.IView providesView() {
+    IMovieDetailContract.IView providesView()git status {
         return mView;
     }
 }

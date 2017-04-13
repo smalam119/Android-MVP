@@ -8,4 +8,7 @@ public class Constants {
 
     //Extras
     public static final String KEY_MOVIE_ID = "movie_id";
+
+    //url
+    public static final String BASE_URL = "https://api.themoviedb.org/3/";
 }

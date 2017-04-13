@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
         });
 
         DaggerMovieListComponent.builder()
-                .apiServiceComponent(((App) getApplicationContext()).getmApiServiceComponent())
+                .apiServiceComponent(((App) getApplicationContext()).getApiServiceComponent())
                 .movieListViewModule(new MovieListViewModule(this))
                 .build().inject(this);
 
