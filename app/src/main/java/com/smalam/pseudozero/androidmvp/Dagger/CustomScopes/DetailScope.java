@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Scope;
 
-/*** Created by Sayed Mahmudul Alam on 4/8/2017.
->>>>>>> 2a3577eec590f951024355852bc0b8188da8681b
+/**
+ * Created by Sayed Mahmudul Alam on 4/14/2017.
  */
 
 @Documented
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CustomScope {
+public @interface DetailScope {
 }

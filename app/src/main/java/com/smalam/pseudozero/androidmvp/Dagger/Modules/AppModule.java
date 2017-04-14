@@ -1,7 +1,6 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
 import android.app.Application;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

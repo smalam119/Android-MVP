@@ -1,7 +1,7 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
 import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
-import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.CustomScope;
+import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.ListScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,7 +19,7 @@ public class MovieListViewModule {
     }
 
     @Provides
-    @CustomScope
+    @ListScope
     IMovieListContact.IView provideMovieListContactView() {
         return mMovieListView;
     }

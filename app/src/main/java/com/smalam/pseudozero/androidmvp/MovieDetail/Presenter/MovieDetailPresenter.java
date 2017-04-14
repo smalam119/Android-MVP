@@ -1,19 +1,20 @@
 package com.smalam.pseudozero.androidmvp.MovieDetail.Presenter;
 
-import android.content.Context;
-
 import com.smalam.pseudozero.androidmvp.Model.MovieDetail;
 import com.smalam.pseudozero.androidmvp.MovieDetail.Interface.IMovieDetailContract;
-import com.smalam.pseudozero.androidmvp.R;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Sayed Mahmudul Alam on 4/4/2017.
@@ -21,21 +22,19 @@ import retrofit2.Response;
 
 public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
 
-    private String mApiKey;
-    private final Context mContext;
-    private final ApiClient mApiClient;
-    private final IMovieDetailContract.IView mView;
+    @Inject
+    IMovieDetailContract.IView mView;
+    Retrofit retrofit;
 
-    public MovieDetailPresenter(Context context, IMovieDetailContract.IView view) {
-        this.mContext = context;
+    @Inject
+    public MovieDetailPresenter(IMovieDetailContract.IView view, Retrofit retrofit) {
         this.mView = view;
-        this.mApiKey = getmApiKey();
-        this.mApiClient = new ApiClient();
+        this.retrofit = retrofit;
     }
 
     @Override
     public void onStopAPIService(int movieId) {
-        mApiClient.getClient().getMovieDetailByObservable(0, mApiKey).unsubscribeOn(Schedulers.newThread());
+        retrofit.create(ApiClient.ApiInterface.class).getMovieDetailByObservable(0).unsubscribeOn(Schedulers.newThread());
     }
 
     @Override
@@ -52,9 +51,8 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
 
         mView.showLoader();
 
-        mApiClient
-                .getClient()
-                .getMovieDetailByCallBack(movieId, mApiKey)
+        retrofit.create(ApiClient.ApiInterface.class)
+                .getMovieDetailByCallBack(movieId)
                 .enqueue(new Callback<MovieDetail>() {
 
                     @Override
@@ -99,17 +97,11 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
             }
         };
 
-        mApiClient
-                .getClient()
-                .getMovieDetailByObservable(movieId, mApiKey)
+        retrofit.create(ApiClient.ApiInterface.class)
+                .getMovieDetailByObservable(movieId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
-    }
-
-    private String getmApiKey() {
-        String apiKey = mContext.getResources().getString(R.string.tmdb_api_key);
-        return apiKey;
     }
 
 }

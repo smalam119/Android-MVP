@@ -1,14 +1,16 @@
 package com.smalam.pseudozero.androidmvp.MovieList.View;
 
 import android.content.Intent;
+import android.content.res.Resources;
+
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 
 import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Constants;
@@ -22,14 +24,12 @@ import com.smalam.pseudozero.androidmvp.R;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.content.res.Resources;
+import javax.inject.Inject;
 
+import android.util.TypedValue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

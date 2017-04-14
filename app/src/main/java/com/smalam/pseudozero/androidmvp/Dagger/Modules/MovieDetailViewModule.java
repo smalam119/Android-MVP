@@ -1,6 +1,6 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
-import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.CustomScope;
+import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.DetailScope;
 import com.smalam.pseudozero.androidmvp.MovieDetail.Interface.IMovieDetailContract;
 
 import dagger.Module;
@@ -19,7 +19,7 @@ public class MovieDetailViewModule {
     }
 
     @Provides
-    @CustomScope
+    @DetailScope
     IMovieDetailContract.IView provideMovieDetailContactView() {
         return mMovieDetailView;
     }
