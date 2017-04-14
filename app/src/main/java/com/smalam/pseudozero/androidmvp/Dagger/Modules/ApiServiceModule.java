@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules;
+package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

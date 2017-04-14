@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules;
+package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
 import android.app.Application;
 

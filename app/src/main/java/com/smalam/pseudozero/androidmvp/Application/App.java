@@ -3,10 +3,10 @@ package com.smalam.pseudozero.androidmvp.Application;
 import android.app.Application;
 
 import com.smalam.pseudozero.androidmvp.Constants;
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Components.ApiServiceComponent;
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Components.DaggerApiServiceComponent;
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.ApiServiceModule;
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.AppModule;
+import com.smalam.pseudozero.androidmvp.Dagger.Components.ApiServiceComponent;
+import com.smalam.pseudozero.androidmvp.Dagger.Components.DaggerApiServiceComponent;
+import com.smalam.pseudozero.androidmvp.Dagger.Modules.ApiServiceModule;
+import com.smalam.pseudozero.androidmvp.Dagger.Modules.AppModule;
 import com.smalam.pseudozero.androidmvp.R;
 
 /**

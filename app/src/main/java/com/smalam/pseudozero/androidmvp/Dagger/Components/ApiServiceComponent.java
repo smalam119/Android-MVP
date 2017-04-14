@@ -1,7 +1,7 @@
-package com.smalam.pseudozero.androidmvp.MovieList.Dagger.Components;
+package com.smalam.pseudozero.androidmvp.Dagger.Components;
 
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.ApiServiceModule;
-import com.smalam.pseudozero.androidmvp.MovieList.Dagger.Modules.AppModule;
+import com.smalam.pseudozero.androidmvp.Dagger.Modules.ApiServiceModule;
+import com.smalam.pseudozero.androidmvp.Dagger.Modules.AppModule;
 
 import javax.inject.Singleton;
 import dagger.Component;

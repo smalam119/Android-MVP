@@ -1,10 +1,7 @@
 package com.smalam.pseudozero.androidmvp.MovieList.Presenter;
 
-import android.content.Context;
-
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
-import com.smalam.pseudozero.androidmvp.R;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
 
 import javax.inject.Inject;
@@ -13,6 +10,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -104,8 +102,4 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
                 .subscribe(movieObserver);
     }
 
-//    private String getmApiKey() {
-//        String apiKey = mContext.getResources().getString(R.string.tmdb_api_key);
-//        return apiKey;
-//    }
 }
