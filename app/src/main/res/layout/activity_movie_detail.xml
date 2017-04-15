@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:src="@drawable/image_placeholder"
-        android:scaleType="fitXY"
+        android:scaleType="center"
         android:paddingLeft="@dimen/movie_title_padding"
         android:paddingRight="@dimen/movie_title_padding"
         android:paddingTop="@dimen/movie_title_padding"/>
@@ -48,15 +48,14 @@
         android:paddingRight="@dimen/movie_title_padding"
         android:paddingTop="@dimen/movie_title_padding"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBG"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MovieDetail.View.MovieDetailActivity"
-        android:orientation="horizontal"
         >
 
         <TextView
@@ -67,6 +66,8 @@
             android:paddingLeft="@dimen/movie_title_padding"
             android:paddingRight="@dimen/movie_title_padding"
             android:paddingTop="@dimen/movie_title_padding"
+            android:paddingBottom="@dimen/movie_title_padding"
+            android:layout_alignParentLeft="true"
             />
 
         <TextView
@@ -77,7 +78,8 @@
             android:paddingLeft="@dimen/movie_title_padding"
             android:paddingRight="@dimen/movie_title_padding"
             android:paddingTop="@dimen/movie_title_padding"
-            android:layout_marginLeft="@dimen/movie_detail_margin"
+            android:paddingBottom="@dimen/movie_title_padding"
+            android:layout_centerInParent="true"
             />
 
         <ImageView
@@ -91,7 +93,7 @@
             android:paddingRight="@dimen/movie_title_padding"
             android:paddingTop="@dimen/movie_title_padding"
             android:paddingBottom="@dimen/movie_title_padding"
-            android:layout_marginLeft="@dimen/movie_detail_margin"/>
+            android:layout_toLeftOf="@+id/movie_detail_vote_avg_text_view"/>
 
         <TextView
             android:id="@+id/movie_detail_vote_avg_text_view"
@@ -102,11 +104,10 @@
             android:paddingRight="@dimen/movie_title_padding"
             android:paddingTop="@dimen/movie_title_padding"
             android:paddingBottom="@dimen/movie_title_padding"
+            android:layout_alignParentRight="true"
             />
 
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/movie_detail_progress_bar"
@@ -114,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:indicatorName="BallPulseIndicator"
+        app:indicatorColor="@color/colorPrimary"
         />
 
 </LinearLayout>

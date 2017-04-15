@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:indicatorName="BallPulseIndicator"
+        app:indicatorColor="@color/colorPrimary"
         />
 
 </RelativeLayout>

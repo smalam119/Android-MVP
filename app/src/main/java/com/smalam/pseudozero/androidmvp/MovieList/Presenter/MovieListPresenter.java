@@ -39,9 +39,6 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
 
     @Override
     public void onStopAPIService() {
-        retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable()
-                .unsubscribeOn(Schedulers.newThread());
     }
 
     private void getMovieDataByCallBack() {
@@ -98,6 +95,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
         retrofit.create(ApiClient.ApiInterface.class)
                 .getMovieResponseByObservable()
                 .subscribeOn(Schedulers.newThread())
+                .unsubscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
     }

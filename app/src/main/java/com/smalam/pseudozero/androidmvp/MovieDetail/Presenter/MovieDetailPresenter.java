@@ -34,7 +34,6 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
 
     @Override
     public void onStopAPIService(int movieId) {
-        retrofit.create(ApiClient.ApiInterface.class).getMovieDetailByObservable(0).unsubscribeOn(Schedulers.newThread());
     }
 
     @Override
@@ -100,6 +99,7 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
         retrofit.create(ApiClient.ApiInterface.class)
                 .getMovieDetailByObservable(movieId)
                 .subscribeOn(Schedulers.newThread())
+                .unsubscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
     }

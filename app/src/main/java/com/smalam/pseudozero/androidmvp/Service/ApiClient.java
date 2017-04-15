@@ -8,14 +8,12 @@ import com.smalam.pseudozero.androidmvp.Model.MovieDetail;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 
 import io.reactivex.Observable;
+
 import retrofit2.Call;
-import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public class ApiClient {
-    private static String BASE_URL =  "https://api.themoviedb.org/3/";
-    private static Retrofit mRetrofit = null;
 
     public interface ApiInterface {
         @GET("movie/now_playing")
