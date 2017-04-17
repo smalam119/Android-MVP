@@ -1,8 +1,10 @@
 package com.smalam.pseudozero.androidmvp.MovieList.Presenter;
 
+import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
 import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
+import com.smalam.pseudozero.androidmvp.Service.NetworkConnectivityReceiverListener;
 
 import javax.inject.Inject;
 
@@ -20,7 +22,7 @@ import retrofit2.Retrofit;
  * Created by Sayed Mahmudul Alam on 4/1/2017.
  */
 
-public class MovieListPresenter implements IMovieListContact.IPresenter {
+public class MovieListPresenter implements IMovieListContact.IPresenter, NetworkConnectivityReceiverListener {
 
     public Retrofit retrofit;
     IMovieListContact.IView mView;
@@ -29,6 +31,7 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
     public MovieListPresenter(IMovieListContact.IView view, Retrofit retrofit) {
         this.mView = view;
         this.retrofit = retrofit;
+        App.getInstance().setConnectivityListener(this);
     }
 
     @Override
@@ -98,6 +101,11 @@ public class MovieListPresenter implements IMovieListContact.IPresenter {
                 .unsubscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        getMovieDataByObserving();
     }
 
 }

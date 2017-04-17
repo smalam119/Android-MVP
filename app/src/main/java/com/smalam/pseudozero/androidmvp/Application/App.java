@@ -8,6 +8,8 @@ import com.smalam.pseudozero.androidmvp.Dagger.Components.DaggerApiServiceCompon
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.ApiServiceModule;
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.AppModule;
 import com.smalam.pseudozero.androidmvp.R;
+import com.smalam.pseudozero.androidmvp.Service.NetworkConnectivityReceiver;
+import com.smalam.pseudozero.androidmvp.Service.NetworkConnectivityReceiverListener;
 
 /**
  * Created by Sayed Mahmudul Alam on 4/8/2017.
@@ -15,10 +17,13 @@ import com.smalam.pseudozero.androidmvp.R;
 
 public class App extends Application {
     private ApiServiceComponent mApiServiceComponent;
+    private static App mApp;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mApp = this;
 
         String apiKey = getApiKey();
 
@@ -28,12 +33,20 @@ public class App extends Application {
                 .build();
     }
 
+    public static synchronized App getInstance() {
+        return mApp;
+    }
+
     public ApiServiceComponent getApiServiceComponent() {
         return mApiServiceComponent;
     }
 
-        private String getApiKey() {
+    private String getApiKey() {
         String apiKey = this.getResources().getString(R.string.tmdb_api_key);
         return apiKey;
+    }
+
+    public void setConnectivityListener(NetworkConnectivityReceiverListener listener) {
+        NetworkConnectivityReceiver.networkConnectivityReceiverListener = listener;
     }
 }
