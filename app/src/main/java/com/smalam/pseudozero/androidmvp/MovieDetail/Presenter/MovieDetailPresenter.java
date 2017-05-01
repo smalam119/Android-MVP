@@ -6,9 +6,9 @@ import com.smalam.pseudozero.androidmvp.Service.ApiClient;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import retrofit2.Call;
@@ -22,28 +22,26 @@ import retrofit2.Retrofit;
 
 public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
 
-    @Inject
     IMovieDetailContract.IView mView;
     Retrofit retrofit;
+    CompositeDisposable compositeDisposable;
+    DisposableObserver movieObserver;
 
     @Inject
-    public MovieDetailPresenter(IMovieDetailContract.IView view, Retrofit retrofit) {
+    public MovieDetailPresenter(IMovieDetailContract.IView view, Retrofit retrofit, CompositeDisposable compositeDisposable) {
         this.mView = view;
         this.retrofit = retrofit;
-    }
-
-    @Override
-    public void onStopAPIService(int movieId) {
+        this.compositeDisposable = compositeDisposable;
     }
 
     @Override
     public void onStopAPIService() {
-
+        //compositeDisposable.dispose();
     }
 
     @Override
     public void getMovieDetailData(int movieId) {
-        getMovieDetailDataByCallBack(movieId);
+        observeMovieDetail(movieId);
     }
 
     private void getMovieDetailDataByCallBack(int movieId) {
@@ -67,15 +65,11 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
                 });
     }
 
-    private void getMovieDataDetailByObserving(int movieId) {
+    private void observeMovieDetail(int movieId) {
 
         mView.showLoader();
 
-        Observer movieObserver = new Observer<MovieDetail>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
+        movieObserver = new DisposableObserver<MovieDetail>() {
 
             @Override
             public void onNext(MovieDetail response) {
@@ -97,11 +91,13 @@ public class MovieDetailPresenter implements IMovieDetailContract.IPresenter {
         };
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieDetailByObservable(movieId)
+                .getMovieDetailObservable(movieId)
                 .subscribeOn(Schedulers.newThread())
                 .unsubscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movieObserver);
+                .subscribeWith(movieObserver);
+
+        compositeDisposable.add(movieObserver);
     }
 
 }

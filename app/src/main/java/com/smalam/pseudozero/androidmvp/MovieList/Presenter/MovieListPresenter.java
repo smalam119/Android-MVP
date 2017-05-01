@@ -8,9 +8,9 @@ import com.smalam.pseudozero.androidmvp.Service.NetworkConnectivityReceiverListe
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import retrofit2.Call;
@@ -26,22 +26,25 @@ public class MovieListPresenter implements IMovieListContact.IPresenter, Network
 
     public Retrofit retrofit;
     IMovieListContact.IView mView;
+    CompositeDisposable compositeDisposable;
+    DisposableObserver movieObserver;
 
     @Inject
-    public MovieListPresenter(IMovieListContact.IView view, Retrofit retrofit) {
+    public MovieListPresenter(IMovieListContact.IView view, Retrofit retrofit,CompositeDisposable compositeDisposable) {
         this.mView = view;
         this.retrofit = retrofit;
+        this.compositeDisposable = compositeDisposable;
         App.getInstance().setConnectivityListener(this);
     }
 
     @Override
     public void getMovieData() {
-        //getMovieDataByCallBack();
-        getMovieDataByObserving();
+        observeMovieList();
     }
 
     @Override
     public void onStopAPIService() {
+        compositeDisposable.dispose();
     }
 
     private void getMovieDataByCallBack() {
@@ -66,15 +69,11 @@ public class MovieListPresenter implements IMovieListContact.IPresenter, Network
         });
     }
 
-    private void getMovieDataByObserving() {
+    private void observeMovieList() {
 
         mView.showLoader();
 
-        Observer movieObserver = new Observer<MovieResponse>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
+        movieObserver = new DisposableObserver<MovieResponse>() {
 
             @Override
             public void onNext(MovieResponse response) {
@@ -96,16 +95,18 @@ public class MovieListPresenter implements IMovieListContact.IPresenter, Network
         };
 
         retrofit.create(ApiClient.ApiInterface.class)
-                .getMovieResponseByObservable()
+                .getMovieListObservable()
                 .subscribeOn(Schedulers.newThread())
                 .unsubscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieObserver);
+
+        compositeDisposable.add(movieObserver);
     }
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
-        getMovieDataByObserving();
+        observeMovieList();
     }
 
 }

@@ -56,6 +56,12 @@ public class MovieDetailActivity extends AppCompatActivity implements IMovieDeta
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onStopAPIService();
+    }
+
+    @Override
     public void showLoader() {
         avLoadingIndicatorView.show();
     }

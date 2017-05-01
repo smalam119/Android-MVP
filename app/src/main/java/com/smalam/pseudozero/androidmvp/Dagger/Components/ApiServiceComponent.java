@@ -5,6 +5,7 @@ import com.smalam.pseudozero.androidmvp.Dagger.Modules.AppModule;
 
 import javax.inject.Singleton;
 import dagger.Component;
+import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Retrofit;
 
 /**
@@ -15,4 +16,5 @@ import retrofit2.Retrofit;
 @Component(modules = {AppModule.class, ApiServiceModule.class})
 public interface ApiServiceComponent {
     Retrofit retrofit();
+    CompositeDisposable compositeDisposable();
 }

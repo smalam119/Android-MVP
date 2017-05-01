@@ -11,7 +11,7 @@ public interface IMovieDetailContract {
 
     interface IPresenter extends IBasePresenter {
         void getMovieDetailData(int movieId);
-        void onStopAPIService(int movieId);
+        void onStopAPIService();
     }
 
     interface IView extends IBaseView {

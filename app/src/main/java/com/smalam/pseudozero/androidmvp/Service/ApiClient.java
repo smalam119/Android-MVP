@@ -20,12 +20,12 @@ public class ApiClient {
         Call<MovieResponse> getMovieResponseByCallBack();
 
         @GET("movie/now_playing")
-        Observable<MovieResponse> getMovieResponseByObservable();
+        Observable<MovieResponse> getMovieListObservable();
 
         @GET("movie/{movie_id}")
         Call<MovieDetail> getMovieDetailByCallBack(@Path("movie_id") int movieId);
 
         @GET("movie/{movie_id}")
-        Observable<MovieDetail> getMovieDetailByObservable(@Path("movie_id") int movieId);
+        Observable<MovieDetail> getMovieDetailObservable(@Path("movie_id") int movieId);
     }
 }
