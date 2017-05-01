@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.bumptech.glide.Glide;
 import com.wang.avi.AVLoadingIndicatorView;
+
 import javax.inject.Inject;
 
 import android.widget.ImageView;
