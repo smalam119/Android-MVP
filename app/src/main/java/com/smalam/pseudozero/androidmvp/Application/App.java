@@ -41,6 +41,7 @@ public class App extends Application {
         return mApiServiceComponent;
     }
 
+    //get the api key from a res file. res file git ignored. provide a api key obtained from tmdb
     private String getApiKey() {
         String apiKey = this.getResources().getString(R.string.tmdb_api_key);
         return apiKey;

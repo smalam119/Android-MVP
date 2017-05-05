@@ -1,7 +1,7 @@
-package com.smalam.pseudozero.androidmvp.MovieDetail.Presenter;
+package com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Presenter;
 
 import com.smalam.pseudozero.androidmvp.Model.MovieDetail;
-import com.smalam.pseudozero.androidmvp.MovieDetail.Interface.IMovieDetailContract;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Interface.IMovieDetailContract;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
 
 import javax.inject.Inject;

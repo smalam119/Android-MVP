@@ -1,8 +1,8 @@
-package com.smalam.pseudozero.androidmvp.MovieList.Presenter;
+package com.smalam.pseudozero.androidmvp.Modules.MovieList.Presenter;
 
 import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Model.MovieResponse;
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.Service.ApiClient;
 import com.smalam.pseudozero.androidmvp.Service.NetworkConnectivityReceiverListener;
 
@@ -34,6 +34,8 @@ public class MovieListPresenter implements IMovieListContact.IPresenter, Network
         this.mView = view;
         this.retrofit = retrofit;
         this.compositeDisposable = compositeDisposable;
+
+        // adding this presenter as connectivity listener
         App.getInstance().setConnectivityListener(this);
     }
 

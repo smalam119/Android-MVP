@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieList.View;
+package com.smalam.pseudozero.androidmvp.Modules.MovieList.View;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,11 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Constants;
 import com.smalam.pseudozero.androidmvp.Model.Movie;
-import com.smalam.pseudozero.androidmvp.MovieDetail.View.MovieDetailActivity;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.View.MovieDetailActivity;
 import com.smalam.pseudozero.androidmvp.Dagger.Components.DaggerMovieListComponent;
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.MovieListViewModule;
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
-import com.smalam.pseudozero.androidmvp.MovieList.Presenter.MovieListPresenter;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.Interface.IMovieListContact;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.Presenter.MovieListPresenter;
 import com.smalam.pseudozero.androidmvp.R;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -27,6 +27,8 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import android.util.TypedValue;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements IMovieListContact
 
     @Override
     public void onDataFetchedError(Object data) {
+        Toast.makeText(this,(String) data,Toast.LENGTH_LONG);
     }
 
     private void prepareView(){

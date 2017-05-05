@@ -1,7 +1,7 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Components;
 
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.MovieListViewModule;
-import com.smalam.pseudozero.androidmvp.MovieList.View.MainActivity;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.View.MainActivity;
 import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.ListScope;
 
 import dagger.Component;

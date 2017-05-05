@@ -1,6 +1,6 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.ListScope;
 
 import dagger.Module;

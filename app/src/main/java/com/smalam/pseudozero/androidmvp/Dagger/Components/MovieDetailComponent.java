@@ -2,7 +2,7 @@ package com.smalam.pseudozero.androidmvp.Dagger.Components;
 
 import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.DetailScope;
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.MovieDetailViewModule;
-import com.smalam.pseudozero.androidmvp.MovieDetail.View.MovieDetailActivity;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.View.MovieDetailActivity;
 
 import dagger.Component;
 

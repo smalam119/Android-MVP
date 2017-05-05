@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieList.View;
+package com.smalam.pseudozero.androidmvp.Modules.MovieList.View;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.smalam.pseudozero.androidmvp.Model.Movie;
-import com.smalam.pseudozero.androidmvp.MovieList.Interface.IMovieListContact;
+import com.smalam.pseudozero.androidmvp.Modules.MovieList.Interface.IMovieListContact;
 import com.smalam.pseudozero.androidmvp.R;
 
 import java.util.List;

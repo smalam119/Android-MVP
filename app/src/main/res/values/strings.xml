@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Android MVP</string>
-    <string name="genre_placeholder">Thriller</string>
-    <string name="title_placeholder">Fight Club</string>
+    <string name="genre_placeholder">Action</string>
+    <string name="title_placeholder">FLorem ipsum</string>
     <string name="vote_placeholder">8.2</string>
     <string name="backdrop_title">Now Playing</string>
     <string name="backdrop_subtitle">From TMDB Website</string>
-    <string name="tagline_placeholder">"We meet at a very strange time"</string>
-    <string name="overview_placeholder">A ticking-time-bomb insomniac and a slippery
-        soap salesman channel primal male aggression into a shocking new
-        form of therapy. Their concept catches on, with underground
-        "fight clubs" forming in every town, until an eccentric gets
-        in the way and ignites an out-of-control spiral toward oblivion.</string>
+    <string name="tagline_placeholder">"Lorem ipsum dolor sit amet"</string>
+    <string name="overview_placeholder">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.</string>
     <string name="runtime_placeholder">123 Minutes</string>
 </resources>

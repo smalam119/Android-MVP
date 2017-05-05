@@ -1,7 +1,7 @@
 package com.smalam.pseudozero.androidmvp.Dagger.Modules;
 
 import com.smalam.pseudozero.androidmvp.Dagger.CustomScopes.DetailScope;
-import com.smalam.pseudozero.androidmvp.MovieDetail.Interface.IMovieDetailContract;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Interface.IMovieDetailContract;
 
 import dagger.Module;
 import dagger.Provides;

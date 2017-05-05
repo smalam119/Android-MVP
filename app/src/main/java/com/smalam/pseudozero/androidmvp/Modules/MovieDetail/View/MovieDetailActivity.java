@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieDetail.View;
+package com.smalam.pseudozero.androidmvp.Modules.MovieDetail.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +10,15 @@ import javax.inject.Inject;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smalam.pseudozero.androidmvp.Application.App;
 import com.smalam.pseudozero.androidmvp.Constants;
 import com.smalam.pseudozero.androidmvp.Dagger.Components.DaggerMovieDetailComponent;
 import com.smalam.pseudozero.androidmvp.Dagger.Modules.MovieDetailViewModule;
 import com.smalam.pseudozero.androidmvp.Model.MovieDetail;
-import com.smalam.pseudozero.androidmvp.MovieDetail.Interface.IMovieDetailContract;
-import com.smalam.pseudozero.androidmvp.MovieDetail.Presenter.MovieDetailPresenter;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Interface.IMovieDetailContract;
+import com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Presenter.MovieDetailPresenter;
 import com.smalam.pseudozero.androidmvp.R;
 
 import butterknife.BindView;
@@ -79,8 +80,10 @@ public class MovieDetailActivity extends AppCompatActivity implements IMovieDeta
 
     @Override
     public void onDataFetchedError(Object data) {
+        Toast.makeText(this,(String) data,Toast.LENGTH_LONG);
     }
 
+    //functions to bind data with view
     private void bindData(MovieDetail movieDetail) {
         titleTextView.setText(movieDetail.getTitle());
         taglineTextView.setText(movieDetail.getTagline());

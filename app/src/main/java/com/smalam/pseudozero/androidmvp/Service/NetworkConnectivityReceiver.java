@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
  * Created by Sayed Mahmudul Alam on 4/18/2017.
  */
 
+//broadcast receiver for internet connection
 public class NetworkConnectivityReceiver extends BroadcastReceiver {
 
     public static NetworkConnectivityReceiverListener networkConnectivityReceiverListener;

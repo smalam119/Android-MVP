@@ -1,4 +1,4 @@
-package com.smalam.pseudozero.androidmvp.MovieDetail.Interface;
+package com.smalam.pseudozero.androidmvp.Modules.MovieDetail.Interface;
 
 import com.smalam.pseudozero.androidmvp.BaseInterface.IBasePresenter;
 import com.smalam.pseudozero.androidmvp.BaseInterface.IBaseView;
@@ -7,6 +7,7 @@ import com.smalam.pseudozero.androidmvp.BaseInterface.IBaseView;
  * Created by Sayed Mahmudul Alam on 4/4/2017.
  */
 
+//contracts that must be agreed upon by views and presenter
 public interface IMovieDetailContract {
 
     interface IPresenter extends IBasePresenter {
@@ -14,6 +15,8 @@ public interface IMovieDetailContract {
         void onStopAPIService();
     }
 
-    interface IView extends IBaseView {
+    interface IView<T> extends IBaseView {
+        void onDataFetchedSuccess(T data);
+        void onDataFetchedError(T data);
     }
 }
